@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Psikotes Terpadu — PT SARANA SUKSES SEJAHTERA 
+    PT GUNUNGMAS SUKSES MAKMUR </title>
+  <style>
+    :root{
+      --brand-bg: #0e1f2f;
+      --brand-accent: #17a2b8;
+      --brand-text: #0e1f2f;
+      --light: #f7f9fc;
+      --muted: #6c757d;
+      --card-bg: #fbfdff;
+    }
+    *{box-sizing:border-box}
+    body{font-family:Inter, Arial, Helvetica, sans-serif;background:var(--light);margin:0;color:#222}
+    header{background:linear-gradient(135deg,var(--brand-bg),#173b5b);color:#fff;padding:20px;border-bottom:4px solid var(--brand-accent)}
+    header .brand{display:flex;flex-direction:column;gap:6px}
+    header h1{margin:0;font-size:18px}
+    header h2{margin:0;font-size:25px}
+    header h3{margin:0;font-size:14px;font-weight:400;color:#cfe9f2}
+    .container{max-width:980px;margin:24px auto;background:#fff;border-radius:12px;box-shadow:0 6px 20px rgba(0,0,0,.08);overflow:hidden}
+    .step-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid #eee;background:#fff}
+    .step-header h3{margin:0;color:var(--brand-text)}
+    .pill{padding:6px 10px;border-radius:999px;font-size:12px;background:#eef6fa;color:var(--brand-text)}
+    .content{padding:22px}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    .full{grid-column:1/-1}
+    label{display:block;font-weight:600;margin-bottom:6px;color:var(--brand-text)}
+    input[type=text], input[type=date], input[type=tel], select, textarea{width:100%;padding:10px;border-radius:8px;border:1px solid #cfd8dc;background:#fcfdff;font-size:14px}
+    textarea{min-height:140px}
+    .question{border:1px solid #e8eef2;border-radius:10px;padding:12px;margin-bottom:12px;background:var(--card-bg)}
+    .likert, .options, .eq-pair{display:flex;gap:10px;flex-wrap:wrap}
+    .likert label, .options label{font-weight:500}
+    .likert input, .options input{margin-right:6px}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-top:1px solid #eee;background:#fbfdff}
+    .btn{padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:700}
+    .btn-primary{background:var(--brand-accent);color:#fff}
+    .btn-secondary{background:#eceff1;color:#333}
+    .muted{color:var(--muted);font-size:13px}
+    .hidden{display:none}
+    .svg-wrap{background:#fff;border:1px solid #e8eef2;border-radius:8px;padding:8px;display:inline-block}
+    .alert{padding:12px 14px;border-radius:8px;font-size:14px;background:#eef9ff;color:#0b3a58;border:1px solid #cfe9f2;margin:12px 0}
+    .result-chip{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:700;font-size:12px;margin-right:8px}
+    .chip-good{background:#eafaf1;color:#1e8449;border:1px solid #c4e6cf}
+    .chip-warn{background:#fff6e7;color:#a76707;border:1px solid #fde3a7}
+    .chip-bad{background:#fdecec;color:#922b21;border:1px solid #f5c9cc}
+    footer{text-align:center;font-size:12px;color:var(--muted);padding:18px}
+    /* Papikostick full-screen card */
+    .papik-card{max-width:760px;margin:22px auto;border-radius:12px;border:1px solid #dfeff4;padding:22px;background:#fff;box-shadow:0 6px 18px rgba(13,45,63,.06)}
+    .papik-card h3{margin-top:0;color:var(--brand-text)}
+    .papik-statements{display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px}
+    .papik-st{border:1px solid #eef6fa;padding:12px;border-radius:10px;background:var(--card-bg)}
+    .papik-st p{margin:0 0 8px 0;font-weight:600}
+    .papik-controls{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+    .small{font-size:13px;color:var(--muted)}
+    .center{text-align:center}
+    /* responsive */
+    @media (max-width:700px){.grid{grid-template-columns:1fr}.papik-controls{flex-direction:column;gap:8px}}
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand" style="text-align: center;">
+      <h1>PSIKOTEST TERPADU</h1>
+      <h2>PT Sarana Sukses Sejahtera - PT Gunungmas Sukses Makmur</h2>
+      <h3>Penilaian Attitude, IQ, Tebak Gambar, EQ</h3>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="step-header">
+      <h3 id="pageTitle">Halaman 1 dari 6</h3>
+      <div class="step-indicator">
+        <span class="pill" id="pillPage">Halaman 1 dari 6</span>
+        <span class="pill" id="pillLabel">Data peserta</span>
+      </div>
+    </div>
+
+    <form id="psikotesForm">
+      <!-- Halaman 1: Data peserta -->
+      <section class="content" data-page="1">
+        <div class="grid">
+          <div class="full alert">Harap isi data dengan benar. Data digunakan untuk verifikasi hasil psikotes.</div>
+
+          <div>
+            <label for="nama">Nama</label>
+            <input type="text" id="nama" name="nama" required />
+          </div>
+
+          <div>
+            <label for="jabatan">Jabatan / Posisi yang dilamar</label>
+            <input type="text" id="jabatan" name="jabatan" required />
+          </div>
+
+          <div>
+            <label for="site">Site Tujuan yang dilamar</label>
+            <input type="text" id="site" name="site" required />
+          </div>
+
+          <div>
+            <label for="nik">NIK KTP</label>
+            <input type="text" id="nik" name="nik" pattern="\d{8,20}" title="Masukkan angka 8-20 digit" required />
+          </div>
+
+          <div>
+            <label for="wa">Nomor WhatsApp</label>
+            <input type="tel" id="wa" name="wa" pattern="\d{10,16}" title="Contoh: 081234567890" required />
+          </div>
+
+          <div>
+            <label for="tanggal">Tanggal Test</label>
+            <input type="date" id="tanggal" name="tanggal" required />
+          </div>
+        
+          <div class="full" style="text-align:right;margin-top:16px">
+              <button type="button" class="btn btn-primary" id="nextPage1">Berikutnya</button>
+        </div>
+
+        </div>
+      </section>
+
+      <!-- Halaman 2: Attitude 25 -->
+      <section class="content hidden" data-page="2">
+        <div class="full alert">Jawab jujur. Skala: 1 (Sangat Tidak Setuju) – 5 (Sangat Setuju).</div>
+        <div id="attitudeContainer"></div>
+      </section>
+
+      <!-- Halaman 3: IQ 20 -->
+      <section class="content hidden" data-page="3">
+        <div class="full alert">Pilih jawaban terbaik.</div>
+        <div id="iqContainer"></div>
+      </section>
+
+      <!-- Halaman 4: Tebak Gambar (warna teks) -->
+      <section class="content hidden" data-page="4">
+        <div class="full alert">Amati pola visual sederhana. Warna sekarang ditampilkan sebagai teks (mis. "Biru Gelap").</div>
+        <div id="visualContainer"></div>
+      </section>
+
+      <!-- Halaman 5: Papikostick 50 (most-least) -->
+      <section class="content hidden" data-page="5">
+        <div class="full alert">Pilih satu yang <strong>Paling Menggambarkan</strong> (MOST) dan satu yang <strong>Paling Tidak Menggambarkan</strong> (LEAST). Setelah memilih keduanya, soal akan berganti otomatis. Anda <strong>tidak dapat kembali</strong> ke soal sebelumnya.</div>
+        <div id="papikContainer"></div>
+      </section>
+
+      <!-- Halaman 6: Submit -->
+      <section class="content hidden" data-page="6">
+        <div class="full alert">Semua jawaban sudah lengkap. Tekan <strong>Kirim ke HR</strong> untuk mengirimkan hasil ke tim HR. Setelah dikirim, hasil tidak akan ditampilkan di layar.</div>
+        <div style="display:flex;gap:12px;align-items:center">
+          <button type="button" class="btn btn-secondary" id="prevBtn">Sebelumnya</button>
+          <button type="submit" class="btn btn-primary" id="submitBtn">Kirim ke HR</button>
+        </div>
+      </section>
+    </form>
+
+    <div class="content hidden" id="finalMessage">
+      <h3>Terima Kasih</h3>
+      <p>Hasil jawaban Anda telah dikirim ke Tim HR. Anda akan dihubungi jika hasil dinyatakan lolos, paling lambat 7 hari kerja.</p>
+      <p class="muted">Untuk konfirmasi, hubungi: Psikotest@hc.3s-gsm.com</p>
+    </div>
+
+    <footer>
+      © 2025 PT Sarana Sukses Sejahtera - PT Gunungmas Sukses Makmur. All rights reserved.<br>
+      Y.F - HCD - Dept HCGA
+    </footer>
+  </div>
+
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>
+    // ===== Branding & state =====
+    emailjs.init('u2JiXLjv68Q7bwpLl'); // public key
+    const SERVICE_ID = 'service_lkcr4at';
+    const TEMPLATE_ID = 'template_jfdz2ra';
+
+    const TOTAL_PAGES = 6;
+    let currentPage = 1;
+
+    // Utility
+    const uid = (p='id') => p+'_'+Math.random().toString(36).slice(2,9);
+    const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
+
+    // Show page
+    function showPage(n){
+      currentPage = n;
+      document.querySelectorAll('[data-page]').forEach(sec=>{
+        sec.classList.toggle('hidden', Number(sec.dataset.page)!==n);
+      });
+      document.getElementById('pillPage').textContent = `Halaman ${n} dari ${TOTAL_PAGES}`;
+      const labels = {
+        1:'Data peserta',2:'Attitude',3:'IQ',4:'Tebak Gambar',5:'Papikostick',6:'Kirim'
+      };
+      document.getElementById('pillLabel').textContent = labels[n];
+      document.getElementById('pageTitle').textContent = `Halaman ${n} dari ${TOTAL_PAGES}`;
+      // prev button enable/disable logic
+      const prevBtn = document.getElementById('prevBtn');
+      if(prevBtn){
+        // disable prev on page 1 or if on Papikostick (page5) to prevent back
+        prevBtn.disabled = (n===1 || n===5);
+      }
+        // auto scroll ke atas setiap kali halaman berubah
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // init show
+    showPage(1);
+  
+// Tombol "Berikutnya" di Halaman 1
+document.getElementById('nextPage1')?.addEventListener('click', ()=>{
+  const required = ['nama','jabatan','site','nik','wa','tanggal'];
+  for(const id of required){
+    const el = document.getElementById(id);
+    if(!el || !el.value){
+      alert('Mohon lengkapi semua data terlebih dahulu.');
+      return;
+    }
+  }
+  showPage(2);
+  onEnterPage(2);
+});
+
+    // ===== Data Pools (unchanged pages 1-3 content but full rendering) =====
+    const attitudePool = [
+      { t: 'Saya menjaga komitmen meski tidak diawasi.', key: 1 },
+      { t: 'Saya mudah menyalahkan orang lain saat terjadi masalah.', key: -1 },
+      { t: 'Saya terbuka menerima umpan balik yang sulit.', key: 1 },
+      { t: 'Saya sering menunda tugas hingga mendekati tenggat.', key: -1 },
+      { t: 'Saya menjaga profesionalitas walau ada tekanan emosional.', key: 1 },
+      { t: 'Saya mengabaikan prosedur jika terlihat merepotkan.', key: -1 },
+      { t: 'Saya membantu rekan tanpa diminta saat melihat kebutuhan.', key: 1 },
+      { t: 'Saya bereaksi berlebihan saat ada perubahan mendadak.', key: -1 },
+      { t: 'Saya konsisten hadir tepat waktu.', key: 1 },
+      { t: 'Saya kerap menolak tanggung jawab tambahan.', key: -1 },
+      { t: 'Saya mampu menenangkan diri sebelum mengambil keputusan.', key: 1 },
+      { t: 'Saya mengutamakan kepentingan pribadi di atas tim.', key: -1 },
+      { t: 'Saya menyelesaikan pekerjaan hingga tuntas.', key: 1 },
+      { t: 'Saya mudah tersulut konflik kecil.', key: -1 },
+      { t: 'Saya mendokumentasikan pekerjaan penting tanpa diminta.', key: 1 },
+      { t: 'Saya sering mengabaikan instruksi rinci.', key: -1 },
+      { t: 'Saya bersikap hormat pada semua level jabatan.', key: 1 },
+      { t: 'Saya meremehkan standar keselamatan kerja.', key: -1 },
+      { t: 'Saya mencari cara meningkatkan kualitas kerja.', key: 1 },
+      { t: 'Saya kerap menyebarkan keluhan di grup kerja.', key: -1 },
+      { t: 'Saya menjaga integritas saat ada godaan.', key: 1 },
+      { t: 'Saya mengabaikan dampak keputusan pada orang lain.', key: -1 },
+      { t: 'Saya menuntaskan tugas yang membosankan dengan disiplin.', key: 1 },
+      { t: 'Saya mudah defensif saat dikritik.', key: -1 },
+      { t: 'Saya proaktif menyelaraskan dengan target perusahaan.', key: 1 },
+    ];
+
+    const iqPool = [
+      { q: 'Jika 2, 6, 12, 20, 30, ... maka angka berikutnya?', options: ['38','40','42','44'], correct: '42' },
+      { q: 'RATA:RTAA :: KERJA:?', options: ['ERKJA','KREJA','KEJRA','KERJA'], correct: 'KREJA' },
+      { q: 'Jika X = 5, Y = 3, maka 2X + 3Y = ?', options: ['19','21','24','16'], correct: '19' },
+      { q: 'Pola huruf: A, C, F, J, O, ... berikutnya?', options: ['U','V','W','T'], correct: 'U' },
+      { q: '5 orang menyelesaikan tugas dalam 12 jam. 10 orang butuh ...?', options: ['6 jam','8 jam','10 jam','12 jam'], correct: '6 jam' },
+      { q: 'Angka hilang: 3, 9, 27, ?, 243', options: ['54','81','72','36'], correct: '81' },
+      { q: 'Jika semua B adalah C, dan semua C adalah D, maka semua B adalah ...?', options: ['D','C','B','A'], correct: 'D' },
+      { q: 'Rasio 4:5 setara dengan ?:?', options: ['8:10','12:14','16:18','20:22'], correct: '8:10' },
+      { q: 'Jika 0.25 dari X adalah 20, maka X = ?', options: ['80','60','100','120'], correct: '80' },
+      { q: 'Urutan logika: 2, 5, 11, 23, ...?', options: ['47','46','45','44'], correct: '47' },
+      { q: 'Sinonim paling dekat: “SIGAP”', options: ['LAMBAN','CEPAT','TANGKAS','PASIF'], correct: 'TANGKAS' },
+      { q: 'Jika P = 2Q, dan Q = 3R, maka P = ... R?', options: ['5R','6R','3R','2R'], correct: '6R' },
+      { q: 'Rata-rata dari 6, 8, 14, 12 adalah?', options: ['10','11','12.5','12'], correct: '10' },
+      { q: 'Lengkapi analogi: “MATA” : “MELIHAT” = “TELINGA” : ...', options: ['BERBICARA','MENDENGAR','BERPIKIR','BERJALAN'], correct: 'MENDENGAR' },
+      { q: 'Jika angka genap dijumlahkan dari 2 sampai 10, hasilnya?', options: ['30','32','28','40'], correct: '30' },
+      { q: 'Urutan: 1, 1, 2, 3, 5, 8, ...?', options: ['11','12','13','14'], correct: '13' },
+      { q: 'Jika 7% dari N adalah 21, maka N = ?', options: ['300','350','250','400'], correct: '300' },
+      { q: 'Kebalikan paling tepat dari “KETAT”', options: ['LONGGAR','KUAT','RAPAT','PADAT'], correct: 'LONGGAR' },
+      { q: 'Jika jam menunjukkan 3:15, sudut antara jarum jam & menit?', options: ['7.5°','15°','22.5°','30°'], correct: '7.5°' },
+      { q: 'Pola: 9, 7, 8, 6, 7, 5, ...?', options: ['6','5','4','8'], correct: '6' },
+    ];
+
+    // Visual pool - color options changed to descriptive text
+    const visualPool = [
+      { type:'bars', q:'Perhatikan tinggi batang. Warna bergantian — warna berikutnya?', options:['Biru Gelap','Biru Muda','Abu-abu','Putih'], correct:'Biru Gelap' },
+      { type:'circles', q:'Pola lingkaran: warna selang-seling. Warna berikutnya?', options:['Biru Muda','Biru Gelap','Putih','Abu-abu'], correct:'Biru Muda' },
+      { type:'triangles', q:'Segitiga berwarna bergantian. Warna berikutnya?', options:['Biru Gelap','Biru Muda','Putih','Abu-abu'], correct:'Biru Gelap' },
+      { type:'bars', q:'Urutan Y meningkat. Pilih jawaban yang sesuai.', options:['Naik besar','Naik kecil','Tetap','Turun kecil'], correct:'Naik kecil' },
+      { type:'circles', q:'Jika pola menambah 1 lingkaran, jumlah setelah satu langkah?', options:['6','5','4','7'], correct:'6' },
+      { type:'triangles', q:'Jumlah segitiga sekarang 3. Prediksi berikutnya.', options:['3','4','2','5'], correct:'3' },
+      { type:'bars', q:'Warna selang-seling. Warna berikutnya?', options:['Biru Gelap','Biru Muda','Putih','Abu-abu'], correct:'Biru Muda' },
+      { type:'circles', q:'Lingkaran bergantian radius. Radius berikutnya?', options:['Lebih besar','Lebih kecil','Tetap','Acak'], correct:'Lebih kecil' },
+      { type:'triangles', q:'Orientasi segitiga tetap. Perubahan kemungkinan?', options:['Posisi','Ukuran','Warna','Jenis'], correct:'Posisi' },
+      { type:'bars', q:'Lebar batang konstan. Variabel berubah?', options:['Tinggi','Lebar','Warna','Jumlah'], correct:'Tinggi' },
+      { type:'circles', q:'Susunan bergerak ke kanan. Arah berikutnya?', options:['Ke kanan','Ke kiri','Ke atas','Tetap'], correct:'Ke kanan' },
+      { type:'triangles', q:'Jika pola berulang, elemen awal akan kembali?', options:['Ya','Tidak','Acak','Tidak pasti'], correct:'Ya' },
+      { type:'bars', q:'Prediksi penambahan batang?', options:['5','4','3','6'], correct:'5' },
+      { type:'circles', q:'Warna bergantian — warna berikutnya?', options:['Biru Muda','Biru Gelap','Putih','Abu-abu'], correct:'Biru Muda' },
+      { type:'triangles', q:'Segitiga dengan pola tertentu — bentuk berikutnya?', options:['Segitiga','Lingkaran','Persegi','Trapesium'], correct:'Segitiga' }
+    ];
+
+    // ===== Renderers for pages 2-4 (as original) =====
+    function shuffle(arr){
+      const a=[...arr];
+      for(let i=a.length-1;i>0;i--){
+        const j=Math.floor(Math.random()*(i+1));
+        [a[i],a[j]]=[a[j],a[i]];
+      }
+      return a;
+    }
+
+    function renderAttitude(){
+      const cont=document.getElementById('attitudeContainer');
+      cont.innerHTML='';
+      const pool = shuffle(attitudePool);
+      pool.forEach((it,idx)=>{
+        const qid = uid('att');
+        const div=document.createElement('div');
+        div.className='question att-item';
+        div.innerHTML = `<h4>${idx+1}. ${it.t}</h4>
+          <div class="likert" data-key="${it.key}">
+            ${[1,2,3,4,5].map(v=>`<label><input type="radio" name="${qid}" value="${v}"/> ${v}</label>`).join('')}
+          </div>`;
+        cont.appendChild(div);
+      });
+    }
+
+    function renderIQ(){
+      const cont=document.getElementById('iqContainer');
+      cont.innerHTML='';
+      const pool = shuffle(iqPool).slice(0,20);
+      pool.forEach((it,idx)=>{
+        const name = uid('iq');
+        const opts = shuffle(it.options);
+        const div=document.createElement('div');
+        div.className='question iq-item';
+        div.dataset.correct = it.correct;
+        div.innerHTML = `<h4>${idx+1}. ${it.q}</h4>
+          <div class="options">
+            ${opts.map(o=>`<label><input type="radio" name="${name}" value="${o}"/> ${o}</label>`).join('')}
+          </div>`;
+        cont.appendChild(div);
+      });
+    }
+
+    // Visual render with textual color options
+    function renderVisual(){
+      const cont=document.getElementById('visualContainer');
+      cont.innerHTML='';
+      const pool = shuffle(visualPool).slice(0,15);
+      pool.forEach((it,idx)=>{
+        const name = uid('vis');
+        const opts = shuffle(it.options);
+        const div=document.createElement('div');
+        div.className='question vis-item';
+        div.dataset.correct = it.correct;
+        div.innerHTML = `<h4>${idx+1}. ${it.q}</h4>
+          <div class="svg-wrap" id="svg_${idx}"></div>
+          <div class="options" style="margin-top:12px">
+            ${opts.map(o=>`<label><input type="radio" name="${name}" value="${o}"/> ${o}</label>`).join('')}
+          </div>`;
+        cont.appendChild(div);
+        // simple illustrative svg
+        const svgNS = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(svgNS,'svg');
+        svg.setAttribute('width',140);
+        svg.setAttribute('height',100);
+        svg.setAttribute('viewBox','0 0 140 100');
+        // draw different simple shapes as placeholder
+        if(it.type==='bars'){
+          for(let i=0;i<4;i++){
+            const r=document.createElementNS(svgNS,'rect');
+            r.setAttribute('x',10+i*30);
+            r.setAttribute('y',30 + i*8);
+            r.setAttribute('width',18);
+            r.setAttribute('height',60 - i*8);
+            r.setAttribute('fill', i%2? '#17a2b8':'#0e1f2f');
+            svg.appendChild(r);
+          }
+        } else if(it.type==='circles'){
+          for(let i=0;i<5;i++){
+            const c=document.createElementNS(svgNS,'circle');
+            c.setAttribute('cx',20+i*24);
+            c.setAttribute('cy',50);
+            c.setAttribute('r',8 + (i%2?3:0));
+            c.setAttribute('fill', i%2? '#17a2b8':'#0e1f2f');
+            svg.appendChild(c);
+          }
+        } else {
+          for(let i=0;i<3;i++){
+            const p=document.createElementNS(svgNS,'polygon');
+            const pts=[[10+i*40,80],[30+i*40,20],[50+i*40,80]];
+            p.setAttribute('points', pts.map(p=>p.join(',')).join(' '));
+            p.setAttribute('fill', i%2? '#17a2b8':'#0e1f2f');
+            svg.appendChild(p);
+          }
+        }
+        document.getElementById(`svg_${idx}`).appendChild(svg);
+      });
+    }
+
+    // Initial render pages 2-4
+    renderAttitude();
+    renderIQ();
+    renderVisual();
+
+    // ===== Papikostick 50 pertanyaan (Halaman 5) =====
+    // 50 pertanyaan dalam Bahasa Indonesia — setiap pertanyaan berisi 3 pernyataan.
+     const papikQuestions = [
+  // 1 - 10
+  { statements: [
+    "Saya lebih memilih menyelesaikan tepat waktu meski harus bekerja extra",
+    "Saya mudah berkolaborasi dengan berbagai tipe kepribadian rekan",
+    "Saya tetap produktif di bawah tekanan deadline yang ketat"
+  ]},
+  
+  { statements: [
+    "Saya senang membimbing rekan baru yang membutuhkan panduan",
+    "Saya percaya diri mengambil keputusan tanpa konsultasi berlebihan",
+    "Saya cepat menyesuaikan workflow ketika prioritas berubah"
+  ]},
+  
+  { statements: [
+    "Saya memandang kritik sebagai kesempatan untuk pengembangan",
+    "Saya lebih termotivasi oleh tantangan kompleks daripada pujian",
+    "Saya bersedia mengerjakan tugas di luar tanggung jawab utama"
+  ]},
+  
+  { statements: [
+    "Saya mengalokasikan waktu ekstra untuk memeriksa detail-detail kecil",
+    "Saya mampu mengelola beberapa proyek sekaligus tanpa kehilangan fokus",
+    "Saya memberikan kesempatan kedua pada rekan yang menunjukkan improvement"
+  ]},
+  
+  { statements: [
+    "Saya aktif meredakan ketegangan yang muncul dalam dinamika tim",
+    "Saya mengerjakan tugas-tugas yang menarik terlebih dahulu",
+    "Saya mengidentifikasi potensi masalah sebelum menjadi kritis"
+  ]},
+  
+  { statements: [
+    "Saya menganalisis berbagai risiko sebelum mengambil tindakan penting",
+    "Saya mudah beralih menggunakan tools dan sistem kerja yang baru",
+    "Saya memberikan umpan balik yang spesifik dan dapat ditindaklanjuti"
+  ]},
+  
+  { statements: [
+    "Saya menjaga rasionalitas selama diskusi yang memanas",
+    "Saya peka terhadap nuansa bahasa dan ekspresi dalam komunikasi",
+    "Saya mencari titik temu yang mengakomodir berbagai kepentingan"
+  ]},
+  
+  { statements: [
+    "Saya mengakui kesalahan secara proaktif tanpa menunggu dikonfrontasi",
+    "Saya menganalisis faktor eksternal yang mempengaruhi outcome pekerjaan",
+    "Saya mendokumentasikan pembelajaran dari setiap pengalaman proyek"
+  ]},
+  
+  { statements: [
+    "Saya mendorong rekan untuk mencapai standar kinerja tertinggi",
+    "Saya menggunakan pencapaian orang lain sebagai benchmark pribadi",
+    "Saya mengapresiasi kontribusi semua anggota tim secara seimbang"
+  ]},
+  
+  { statements: [
+    "Saya merasa energik ketika berdiskusi dan brainstorming dalam tim",
+    "Saya menghasilkan karya terbaik dalam lingkungan kerja yang tenang",
+    "Saya menghormati keputusan final meski memiliki pendapat berbeda"
+  ]},
+
+  // 11 - 20
+  { statements: [
+    "Saya mengutamakan hasil akhir yang memberikan impact signifikan",
+    "Saya memilih menyelesaikan dengan cepat dengan kualitas yang acceptable",
+    "Saya membuat timeline realistis dengan memperhitungkan buffer time"
+  ]},
+  
+  { statements: [
+    "Saya tegas dalam menegakkan standar dan prosedur kualitas",
+    "Saya berkonsultasi dengan tim sebelum mengambil keputusan penting",
+    "Saya mengambil kendali ketika situasi membutuhkan kepemimpinan cepat"
+  ]},
+  
+  { statements: [
+    "Saya menjaga konsistensi antara perkataan dan tindakan nyata",
+    "Saya fleksibel dalam menginterpretasikan guideline yang ada",
+    "Saya transparan tentang keterbatasan dan tantangan yang dihadapi"
+  ]},
+  
+  { statements: [
+    "Saya membuat perencanaan kerja terstruktur untuk setiap periode",
+    "Saya mengatur prioritas berdasarkan tingkat urgensi tugas",
+    "Saya menyesuaikan rencana ketika muncul informasi atau kondisi baru"
+  ]},
+  
+  { statements: [
+    "Saya meminta umpan balik di tengah proses pengerjaan tugas",
+    "Saya selektif dalam mempertimbangkan saran dari berbagai sumber",
+    "Saya aktif mencari perspektif berbeda untuk pengambilan keputusan"
+  ]},
+  
+  { statements: [
+    "Saya menyelesaikan tugas-tugas rutin dengan efisien dan cepat",
+    "Saya menghabiskan waktu memahami proses baru secara mendalam",
+    "Saya mengambil tindakan segera dalam situasi darurat atau kritis"
+  ]},
+  
+  { statements: [
+    "Saya memberikan update progress secara teratur dan terjadwal",
+    "Saya menjelaskan konsep kompleks dengan contoh dan analogi",
+    "Saya memastikan kesepahaman semua pihak sebelum eksekusi"
+  ]},
+  
+  { statements: [
+    "Saya menganggap kesuksesan tim sebagai pencapaian pribadi",
+    "Saya fokus pada pencapaian target dan KPI individual",
+    "Saya berkontribusi aktif terhadap tujuan kolektif tim"
+  ]},
+  
+  { statements: [
+    "Saya dapat merasakan ketika rekan mengalami kesulitan pekerjaan",
+    "Saya lebih fokus pada penyelesaian tugas daripada dinamika interpersonal",
+    "Saya menawarkan bantuan ketika melihat rekan sedang overwhelmed"
+  ]},
+  
+  { statements: [
+    "Saya mengikuti prosedur established dengan disiplin tinggi",
+    "Saya bereksperimen dengan berbagai pendekatan kerja yang berbeda",
+    "Saya menghormati protokol dan sistem perusahaan yang berlaku"
+  ]},
+
+  // 21 - 30
+  { statements: [
+    "Saya fokus pada solusi yang dapat segera diimplementasikan",
+    "Saya menganalisis akar masalah secara komprehensif dan mendalam",
+    "Saya menerapkan perbaikan cepat untuk mengatasi masalah segera"
+  ]},
+  
+  { statements: [
+    "Saya tetap profesional saat menerima kritik dan masukan",
+    "Saya responsive terhadap nada emosional dalam komunikasi",
+    "Saya mengklarifikasi maksud sebelum memberikan respons"
+  ]},
+  
+  { statements: [
+    "Saya cepat memahami dinamika dan kultur tim baru",
+    "Saya mengamati terlebih dahulu sebelum berpartisipasi penuh",
+    "Saya menginisiasi koneksi dengan kolega baru secara proaktif"
+  ]},
+  
+  { statements: [
+    "Saya terus mencari cara untuk meningkatkan efektivitas kerja",
+    "Saya bertahan dengan metode yang sudah terbukti efektif",
+    "Saya mengoptimalkan proses untuk mendapatkan efisiensi lebih"
+  ]},
+  
+  { statements: [
+    "Saya memberikan pujian yang spesifik untuk pencapaian tertentu",
+    "Saya menunjukkan apresiasi melalui tindakan nyata daripada kata-kata",
+    "Saya percaya pada kekuatan reinforcement positif dalam tim"
+  ]},
+  
+  { statements: [
+    "Saya mengalokasikan blok waktu khusus untuk tipe tugas berbeda",
+    "Saya bekerja secara intuitif berdasarkan level energi dan fokus",
+    "Saya menggunakan tools manajemen tugas secara konsisten"
+  ]},
+  
+  { statements: [
+    "Saya menjaga kejernihan berpikir di bawah tekanan tinggi",
+    "Saya membutuhkan waktu tenang untuk mengembalikan fokus",
+    "Saya menerapkan teknik reduksi stres yang terukur"
+  ]},
+  
+  { statements: [
+    "Saya mengajukan ide-ide baru secara reguler dan terstruktur",
+    "Saya menunggu persetujuan sebelum melanjutkan inisiatif baru",
+    "Saya mendukung ide-ide inovatif yang datang dari anggota lain"
+  ]},
+  
+  { statements: [
+    "Saya mempertimbangkan dampak pada semua pihak terkait",
+    "Saya membuat keputusan berdasarkan data dan fakta objektif",
+    "Saya berusaha memahami berbagai sudut pandang yang ada"
+  ]},
+  
+  { statements: [
+    "Saya mendorong komunikasi terbuka dan jujur dalam tim",
+    "Saya memproses pemikiran internal sebelum membagikannya",
+    "Saya memfasilitasi diskusi untuk menyelesaikan perbedaan"
+  ]},
+
+  // 31 - 40
+  { statements: [
+    "Saya mudah memahami perasaan dan situasi yang dihadapi rekan",
+    "Saya merasa terganggu ketika harus sering menginterupsi pekerjaan",
+    "Saya mampu menyeimbangkan antara empati dan tanggung jawab tugas"
+  ]},
+  
+  { statements: [
+    "Saya bertindak berdasarkan prinsip keadilan yang konsisten",
+    "Saya kadang mempertimbangkan hubungan personal dalam keputusan",
+    "Saya berusaha menjaga objektivitas dalam setiap penilaian"
+  ]},
+  
+  { statements: [
+    "Saya kreatif dalam mencari alternatif solusi yang berbeda",
+    "Saya cenderung mengikuti pendekatan yang sudah familiar",
+    "Saya terbuka mencoba metode baru untuk meningkatkan efisiensi"
+  ]},
+  
+  { statements: [
+    "Saya disiplin mengikuti aturan dan kebijakan perusahaan",
+    "Saya menyesuaikan penerapan aturan berdasarkan konteks situasi",
+    "Saya memahami filosofi di balik aturan dan menerapkannya"
+  ]},
+  
+  { statements: [
+    "Saya mengutamakan aspek keselamatan dalam setiap aktivitas",
+    "Saya menyeimbangkan antara safety protocols dan efisiensi waktu",
+    "Saya aktif mengingatkan rekan tentang prosedur keselamatan"
+  ]},
+  
+  { statements: [
+    "Saya mau belajar dari kesalahan dan pengalaman pribadi",
+    "Saya sulit menerima ketika pendekatan saya kurang efektif",
+    "Saya merefleksikan pengalaman untuk perbaikan berkelanjutan"
+  ]},
+  
+  { statements: [
+    "Saya mampu memimpin diskusi tim ke arah yang konstruktif",
+    "Saya cenderung mendominasi pembicaraan dalam forum diskusi",
+    "Saya memastikan semua suara memiliki kesempatan didengar"
+  ]},
+  
+  { statements: [
+    "Saya menjaga profesionalitas dalam semua bentuk komunikasi",
+    "Saya ekspresif dalam menyampaikan perasaan dan pendapat",
+    "Saya memilih kata-kata dengan pertimbangan efek psikologis"
+  ]},
+  
+  { statements: [
+    "Saya mengelola pekerjaan dengan perencanaan matang dan detail",
+    "Saya merespons tugas dan permintaan secara real-time",
+    "Saya memecah proyek besar menjadi tahapan-tahapan kecil"
+  ]},
+  
+  { statements: [
+    "Saya merespons permintaan atasan dengan cepat dan tepat",
+    "Saya membutuhkan waktu untuk memproses instruksi kompleks",
+    "Saya aktif mencari klarifikasi ketika instruksi kurang jelas"
+  ]},
+
+  // 41 - 50
+  { statements: [
+    "Saya terus berusaha mengembangkan kompetensi dan skill baru",
+    "Saya fokus menguasai bidang keahlian yang sudah dimiliki",
+    "Saya mengikuti pelatihan untuk pengembangan profesional"
+  ]},
+  
+  { statements: [
+    "Saya menjaga kredibilitas melalui konsistensi perilaku",
+    "Saya adaptif dalam menyesuaikan gaya kerja dengan situasi",
+    "Saya menyadari pentingnya reputasi profesional jangka panjang"
+  ]},
+  
+  { statements: [
+    "Saya mampu bekerja dalam lingkungan dengan budaya beragam",
+    "Saya membutuhkan penyesuaian dengan budaya kerja yang berbeda",
+    "Saya berusaha memahami norma dan nilai tim yang baru"
+  ]},
+  
+  { statements: [
+    "Saya cenderung menyelesaikan konflik secara langsung dan terbuka",
+    "Saya menghindari konfrontasi langsung untuk menjaga harmony",
+    "Saya mencari solusi yang adil untuk semua pihak terlibat"
+  ]},
+  
+  { statements: [
+    "Saya mampu bekerja efektif di bawah tekanan target ketat",
+    "Saya merasa produktivitas menurun under constant pressure",
+    "Saya membuat strategi realistis untuk memenuhi target waktu"
+  ]},
+  
+  { statements: [
+    "Saya berkomitmen menyelesaikan tugas yang menjadi tanggung jawab",
+    "Saya kehilangan momentum pada tugas-tugas jangka panjang",
+    "Saya mencari support system ketika menghadapi kesulitan"
+  ]},
+  
+  { statements: [
+    "Saya jujur dalam melaporkan progres dan pencapaian kerja",
+    "Saya menyoroti aspek positif dalam pelaporan progress",
+    "Saya memastikan data yang dilaporkan akurat dan terverifikasi"
+  ]},
+  
+  { statements: [
+    "Saya percaya pada pentingnya hubungan kerja jangka panjang",
+    "Saya berorientasi pada hasil dan pencapaian jangka pendek",
+    "Saya membangun jaringan profesional yang saling menguntungkan"
+  ]},
+  
+  { statements: [
+    "Saya fleksibel ketika terjadi perubahan jadwal mendadak",
+    "Saya merasa produktivitas terganggu ketika rutinitas berubah",
+    "Saya mencari solusi immediate ketika terjadi perubahan plan"
+  ]},
+  
+  { statements: [
+    "Saya memperhatikan kesejahteraan dan beban kerja rekan tim",
+    "Saya fokus pada penyelesaian tugas dan pencapaian target",
+    "Saya mengingatkan rekan tentang pentingnya work-life balance"
+  ]}
+    ];
+    // papikQuestions length must be 50
+    // ensure we have exactly 50; if fewer, duplicate some with minor changes (but we created 50)
+    // sanity check:
+    if(papikQuestions.length !== 50){
+      // fallback: pad by repeating
+      while(papikQuestions.length<50){
+        const idx = papikQuestions.length % papikQuestions.length;
+        papikQuestions.push(JSON.parse(JSON.stringify(papikQuestions[idx])));
+      }
+      papikQuestions.length = 50;
+    }
+
+    // Papikostick logic
+    let papikIndex = 0;
+    const papikContainer = document.getElementById('papikContainer');
+    const papikAnswers = []; // store {most: idx, least: idx}
+
+    function renderPapikQuestion(idx){
+      // disable Prev while on papik page to prevent back
+      const prevBtn = document.getElementById('prevBtn');
+      if(prevBtn) prevBtn.disabled = true;
+
+      const item = papikQuestions[idx];
+      papikContainer.innerHTML = `
+        <div class="papik-card" role="group" aria-labelledby="papikTitle">
+          <h3 id="papikTitle">Pertanyaan ${idx+1} dari 50</h3>
+          <div class="small">Pilih 1 yang <strong>Paling Menggambarkan</strong> dan 1 yang <strong>Paling Tidak Menggambarkan</strong></div>
+          <div class="papik-statements" id="papikStatements">
+            ${item.statements.map((s,i)=>`
+              <div class="papik-st" data-st-index="${i}">
+                <p>${s}</p>
+                <div>
+                  <label><input type="radio" name="most" value="${i}"> Paling Menggambarkan</label>
+                  &nbsp;&nbsp;
+                  <label><input type="radio" name="least" value="${i}"> Paling Tidak Menggambarkan</label>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="papik-controls">
+            <div class="small">Soal bersifat satu arah — tidak dapat kembali ke soal sebelumnya.</div>
+            <div class="small center">Silakan pilih kedua opsi untuk melanjutkan.</div>
+          </div>
+        </div>
+      `;
+      // listen changes
+      const mostRadios = papikContainer.querySelectorAll('input[name="most"]');
+      const leastRadios = papikContainer.querySelectorAll('input[name="least"]');
+      function checkAndAdvance(){
+        const most = papikContainer.querySelector('input[name="most"]:checked');
+        const least = papikContainer.querySelector('input[name="least"]:checked');
+        if(most && least){
+          if(most.value === least.value){
+            alert('Anda tidak boleh memilih pernyataan yang sama sebagai MOST dan LEAST. Silakan pilih kembali.');
+            // uncheck least to force change
+            least.checked = false;
+            return;
+          }
+          // save answer
+          papikAnswers.push({most: Number(most.value), least: Number(least.value)});
+          // small delay for UX then next
+          setTimeout(()=>{
+            if(papikIndex < papikQuestions.length - 1){
+              papikIndex++;
+              renderPapikQuestion(papikIndex);
+            } else {
+              // finished all papik questions -> go to page 6
+              showPage(6);
+            }
+          }, 250);
+        }
+      }
+      mostRadios.forEach(r=>r.addEventListener('change', checkAndAdvance));
+      leastRadios.forEach(r=>r.addEventListener('change', checkAndAdvance));
+    }
+
+    // When entering page 5, render first papik question
+    // We'll hook navigation controls to detect page switch
+    function onEnterPage(n){
+      if(n===5){
+        papikIndex = 0;
+        papikAnswers.length = 0;
+        renderPapikQuestion(0);
+      }
+      // when entering page 6, re-enable prev (but still allow previous except for papik step)
+      if(n===6){
+        const prevBtn = document.getElementById('prevBtn');
+        if(prevBtn) prevBtn.disabled = false;
+      }
+    }
+
+    // Prev button handling (only for non-papik)
+    const prevBtn = document.getElementById('prevBtn');
+    if(prevBtn){
+      prevBtn.addEventListener('click', ()=>{
+        if(currentPage>1 && currentPage!==5){
+          showPage(clamp(currentPage-1,1,TOTAL_PAGES));
+          onEnterPage(currentPage);
+        }
+      });
+    }
+
+    
+
+    // Simple "Next" by clicking any radio completion in pages 2-4:
+    // For Attitude: when all items answered -> go next
+    function monitorAttitudeAutoNext(){
+      const container = document.getElementById('attitudeContainer');
+      container.addEventListener('change', ()=>{
+        const items = container.querySelectorAll('.att-item');
+        let all=true;
+        items.forEach(it=>{
+          if(!it.querySelector('input[type="radio"]:checked')) all=false;
+        });
+        if(all){
+          // advance to IQ
+          showPage(3);
+          onEnterPage(3);
+        }
+      });
+    }
+    monitorAttitudeAutoNext();
+
+    // For IQ: when all answered -> next to visual
+    function monitorIQAutoNext(){
+      const container = document.getElementById('iqContainer');
+      container.addEventListener('change', ()=>{
+        const items = container.querySelectorAll('.iq-item');
+        let all=true;
+        items.forEach(it=>{
+          if(!it.querySelector('input[type="radio"]:checked')) all=false;
+        });
+        if(all){
+          showPage(4);
+          onEnterPage(4);
+        }
+      });
+    }
+    monitorIQAutoNext();
+
+    // Visual monitor -> when all answered -> goto papikostick (page5)
+    function monitorVisualAutoNext(){
+      const container = document.getElementById('visualContainer');
+      container.addEventListener('change', ()=>{
+        const items = container.querySelectorAll('.vis-item');
+        let all=true;
+        items.forEach(it=>{
+          if(!it.querySelector('input[type="radio"]:checked')) all=false;
+        });
+        if(all){
+          showPage(5);
+          onEnterPage(5);
+        }
+      });
+    }
+    monitorVisualAutoNext();
+
+    // ====== Submit (final) ======
+    // On submit, gather minimal required data + papikAnswers and send via EmailJS
+    const form = document.getElementById('psikotesForm');
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      // basic final validation: ensure papikAnswers length is 50
+      if(papikAnswers.length < papikQuestions.length){
+        if(currentPage===6){
+          // if user reached page6 but didn't complete, block
+          alert('Anda belum menyelesaikan semua pertanyaan. Kembali dan selesaikan terlebih dahulu.');
+          return;
+        }
+      }
+      // ======== Tambahan Perhitungan Rekomendasi ========
+
+// hitung nilai attitude (1–5, dengan pembobotan positif/negatif)
+function calculateAttitudeScore() {
+  const items = document.querySelectorAll('.att-item');
+  let score = 0;
+  items.forEach(it => {
+    const key = Number(it.querySelector('.likert').dataset.key);
+    const val = Number(it.querySelector('input[type="radio"]:checked')?.value || 0);
+    if (val) score += key > 0 ? val : (6 - val); // pembalikan untuk item negatif
+  });
+  return (score / (items.length * 5)) * 100;
+}
+
+// hitung IQ
+function calculateIQScore() {
+  const items = document.querySelectorAll('.iq-item');
+  let benar = 0;
+  items.forEach(it => {
+    const selected = it.querySelector('input[type="radio"]:checked');
+    if (selected && selected.value === it.dataset.correct) benar++;
+  });
+  return (benar / items.length) * 100;
+}
+
+// hitung Visual Test
+function calculateVisualScore() {
+  const items = document.querySelectorAll('.vis-item');
+  let benar = 0;
+  items.forEach(it => {
+    const selected = it.querySelector('input[type="radio"]:checked');
+    if (selected && selected.value === it.dataset.correct) benar++;
+  });
+  return (benar / items.length) * 100;
+}
+
+// gabungkan skor akhir dan hasil rekomendasi
+function generateRecommendation() {
+  const att = calculateAttitudeScore();
+  const iq = calculateIQScore();
+  const vis = calculateVisualScore();
+  const total = (att * 0.4) + (iq * 0.4) + (vis * 0.2);
+  let rekom;
+  if (total >= 80) rekom = "Direkomendasikan";
+  else if (total >= 60) rekom = "Disarankan";
+  else rekom = "Tidak Disarankan";
+  return {att, iq, vis, total, rekom};
+}
+
+      // prepare payload
+      const {att, iq, vis, total, rekom} = generateRecommendation();
+
+const payload = {
+  nama: document.getElementById('nama').value || '',
+  jabatan: document.getElementById('jabatan').value || '',
+  site: document.getElementById('site').value || '',
+  nik: document.getElementById('nik').value || '',
+  wa: document.getElementById('wa').value || '',
+  tanggal: document.getElementById('tanggal').value || '',
+  attitude_score: att.toFixed(1),
+  iq_score: iq.toFixed(1),
+  visual_score: vis.toFixed(1),
+  total_score: total.toFixed(1),
+  recommendation: rekom,
+  papik_results: formatPapikostik(papikAnswers),
+  note: 'Hasil Papikostick dikirim otomatis. Tidak menampilkan hasil di UI.'
+};
+
+
+      // disable button to avoid dupe
+      const submitBtn = document.getElementById('submitBtn');
+      if(submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Mengirim...'; }
+
+      try{
+        await emailjs.send(SERVICE_ID, TEMPLATE_ID, payload);
+        // hide form, show final message
+        document.getElementById('psikotesForm').classList.add('hidden');
+        document.getElementById('finalMessage').classList.remove('hidden');
+      }catch(err){
+        console.error(err);
+        alert('Gagal mengirim hasil ke server EmailJS. Silakan cek koneksi atau hubungi Psikotest@hc.3s-gsm.com');
+        if(submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Kirim ke HR'; }
+      }
+    });
+
+    // Prevent Enter from submitting forms unexpectedly
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter'){
+        const active = document.activeElement;
+        if(active && (active.tagName==='INPUT' || active.tagName==='TEXTAREA')){
+          // allow
+        } else {
+          e.preventDefault();
+        }
+      }
+    });
+
+    // Initialize: render first pages content (attitude/iq/visual already rendered above)
+    // Render Papikostick container blank until user reaches page 5
+    document.getElementById('papikContainer').innerHTML = '<div class="small">Soal akan muncul setelah mengakses halaman ini.</div>';
+
+    // Safety: if user reloads on page 5, reset papikIndex
+    window.addEventListener('beforeunload', (e)=> {
+      // no-op, but kept for potential future
+    });
+
+    function formatPapikostik(data) {
+  if (!Array.isArray(data) || data.length === 0) return "Belum ada hasil Papikostick.";
+  
+  // Hitung skor untuk setiap faktor
+  const faktorSkor = { D: 0, I: 0, S: 0, C: 0 };
+  
+  data.forEach((item, index) => {
+    // Beri skor berdasarkan pilihan MOST (nilai +2) dan LEAST (nilai -1)
+    if (item.most !== undefined) {
+      // Mapping pertanyaan ke faktor (sesuaikan dengan struktur pertanyaan Anda)
+      const faktor = getFaktorByQuestion(index, item.most);
+      faktorSkor[faktor] += 2;
+    }
+    
+    if (item.least !== undefined) {
+      const faktor = getFaktorByQuestion(index, item.least);
+      faktorSkor[faktor] -= 1;
+    }
+  });
+  
+  // Format hasil menjadi tabel sederhana
+  let html = '<table style="width:100%;border-collapse:collapse;margin-top:10px;">';
+  html += '<tr><th style="border:1px solid #ccc;padding:8px;background:#f3f6fa;">Faktor</th><th style="border:1px solid #ccc;padding:8px;background:#f3f6fa;">Skor</th><th style="border:1px solid #ccc;padding:8px;background:#f3f6fa;">Keterangan</th></tr>';
+  
+  const faktorNama = {
+    'D': 'Dominance',
+    'I': 'Influence', 
+    'S': 'Steadiness',
+    'C': 'Conscientiousness'
+  };
+  
+  const faktorDesc = {
+    'D': 'Kemampuan memimpin, mengambil keputusan',
+    'I': 'Kemampuan bersosialisasi, komunikasi',
+    'S': 'Stabilitas, ketekunan, kesabaran',
+    'C': 'Ketelitian, analitis, sistematis'
+  };
+  
+  // Urutkan dari skor tertinggi ke terendah
+  const sortedFaktor = Object.entries(faktorSkor).sort((a, b) => b[1] - a[1]);
+  
+  sortedFaktor.forEach(([kode, skor]) => {
+    const tingkat = skor >= 15 ? 'Tinggi' : skor >= 5 ? 'Sedang' : 'Rendah';
+    const warna = skor >= 15 ? '#eafaf1' : skor >= 5 ? '#fff6e7' : '#fdecec';
+    
+    html += `<tr style="background:${warna}">
+      <td style="border:1px solid #ddd;padding:8px;"><strong>${faktorNama[kode]}</strong></td>
+      <td style="border:1px solid #ddd;padding:8px;text-align:center;">${skor}</td>
+      <td style="border:1px solid #ddd;padding:8px;">${faktorDesc[kode]} (${tingkat})</td>
+    </tr>`;
+  });
+  
+  html += '</table>';
+  
+  // Tampilkan faktor dominan
+  const faktorDominan = sortedFaktor[0][0];
+  html += `<p style="margin-top:12px;"><strong>Faktor Dominan:</strong> ${faktorNama[faktorDominan]} - ${faktorDesc[faktorDominan]}</p>`;
+  
+  return html;
+}
+
+// Fungsi untuk mapping pertanyaan ke faktor DISC yang sudah direvisi
+function getFaktorByQuestion(questionIndex, statementIndex) {
+  const mapping = {
+    // Pertanyaan 1-10
+    0: ['C', 'I', 'S'], // Tepat waktu (C), Kolaborasi (I), Produktif tekanan (S)
+    1: ['I', 'D', 'C'], // Membimbing (I), Keputusan mandiri (D), Adaptasi workflow (C)
+    2: ['S', 'D', 'C'], // Kritik sebagai development (S), Termotivasi tantangan (D), Tugas tambahan (C)
+    3: ['C', 'D', 'S'], // Detail kecil (C), Multi-proyek (D), Kesempatan kedua (S)
+    4: ['S', 'D', 'C'], // Redakan ketegangan (S), Tugas menarik pertama (D), Identifikasi masalah (C)
+    5: ['C', 'I', 'S'], // Analisis risiko (C), Adaptasi tools (I), Feedback spesifik (S)
+    6: ['S', 'I', 'I'], // Rasional diskusi (S), Peka bahasa (I), Titik temu (I)
+    7: ['D', 'C', 'S'], // Akui kesalahan (D), Analisis faktor eksternal (C), Dokumentasi pembelajaran (S)
+    8: ['I', 'D', 'S'], // Dorong standar tinggi (I), Benchmark pencapaian (D), Apresiasi seimbang (S)
+    9: ['I', 'C', 'S'], // Energik diskusi (I), Lingkungan tenang (C), Hormat keputusan (S)
+
+    // Pertanyaan 11-20
+    10: ['D', 'C', 'C'], // Impact signifikan (D), Cepat acceptable (C), Timeline realistis (C)
+    11: ['D', 'S', 'D'], // Tegas standar (D), Konsultasi tim (S), Kendali situasi (D)
+    12: ['C', 'I', 'C'], // Konsistensi kata-tindakan (C), Fleksibel guideline (I), Transparan limitation (C)
+    13: ['C', 'D', 'I'], // Perencanaan terstruktur (C), Prioritas urgensi (D), Sesuaikan informasi baru (I)
+    14: ['S', 'C', 'I'], // Feedback proses (S), Selektif saran (C), Perspektif berbeda (I)
+    15: ['C', 'S', 'D'], // Efisien rutin (C), Pahami proses baru (S), Tindakan darurat (D)
+    16: ['C', 'I', 'S'], // Update teratur (C), Jelaskan analogi (I), Pastikan alignment (S)
+    17: ['S', 'D', 'S'], // Sukses tim=pribadi (S), Fokus KPI individual (D), Kontribusi kolektif (S)
+    18: ['I', 'D', 'I'], // Sensing kesulitan (I), Fokus tugas (D), Tawar bantuan (I)
+    19: ['C', 'D', 'C'], // Ikuti prosedur (C), Eksperimen pendekatan (D), Hormat protokol (C)
+
+    // Pertanyaan 21-30
+    20: ['D', 'C', 'D'], // Solusi implementable (D), Analisis akar masalah (C), Perbaikan cepat (D)
+    21: ['S', 'I', 'S'], // Profesional kritik (S), Responsive nada emosional (I), Klarifikasi maksud (S)
+    22: ['I', 'S', 'I'], // Pahami dinamika tim (I), Amati dulu (S), Inisiasi koneksi (I)
+    23: ['D', 'S', 'C'], // Tingkatkan efektivitas (D), Metode proven (S), Optimasi proses (C)
+    24: ['I', 'S', 'I'], // Pujian spesifik (I), Apresiasi tindakan (S), Reinforcement positif (I)
+    25: ['C', 'D', 'C'], // Blok waktu (C), Kerja intuitif (D), Konsisten tools (C)
+    26: ['S', 'C', 'S'], // Kejernihan tekanan (S), Waktu tenang (C), Teknik reduksi stres (S)
+    27: ['D', 'S', 'I'], // Ajukan ide baru (D), Tunggu persetujuan (S), Dukung inovasi (I)
+    28: ['S', 'C', 'I'], // Pertimbangkan dampak (S), Keputusan data (C), Pahami sudut pandang (I)
+    29: ['I', 'C', 'S'], // Komunikasi terbuka (I), Proses internal (C), Fasilitasi diskusi (S)
+
+    // Pertanyaan 31-40
+    30: ['I', 'D', 'S'], // Empati perasaan (I), Terganggu interupsi (D), Seimbang empati-tugas (S)
+    31: ['C', 'I', 'C'], // Keadilan konsisten (C), Pertimbangan hubungan (I), Objektivitas penilaian (C)
+    32: ['D', 'S', 'I'], // Kreatif alternatif (D), Ikuti familiar (S), Coba metode baru (I)
+    33: ['C', 'I', 'C'], // Disiplin aturan (C), Sesuaikan konteks (I), Pahami filosofi aturan (C)
+    34: ['C', 'D', 'C'], // Utamakan safety (C), Balance safety-efisiensi (D), Ingatkan prosedur (C)
+    35: ['S', 'D', 'S'], // Belajar kesalahan (S), Sulit terima inefektif (D), Refleksi pengalaman (S)
+    36: ['D', 'D', 'I'], // Pimpin diskusi konstruktif (D), Dominasi forum (D), Semua suara didengar (I)
+    37: ['C', 'I', 'I'], // Profesional komunikasi (C), Ekspresif perasaan (I), Pertimbangan kata (I)
+    38: ['C', 'D', 'C'], // Perencanaan matang (C), Respons real-time (D), Pecah proyek (C)
+    39: ['C', 'S', 'C'], // Respons cepat atasan (C), Proses instruksi kompleks (S), Klarifikasi instruksi (C)
+
+    // Pertanyaan 41-50
+    40: ['D', 'C', 'D'], // Develop kompetensi (D), Kuasai bidang existing (C), Pelatihan profesional (D)
+    41: ['C', 'I', 'C'], // Konsistensi kredibilitas (C), Adaptif gaya kerja (I), Reputasi jangka panjang (C)
+    42: ['I', 'S', 'I'], // Kerja budaya beragam (I), Penyesuaian budaya (S), Pahami norma baru (I)
+    43: ['D', 'S', 'I'], // Selesaikan konflik langsung (D), Hindari konfrontasi (S), Solusi adil (I)
+    44: ['D', 'S', 'C'], // Efektif tekanan target (D), Produktivitas turun pressure (S), Strategi realistis (C)
+    45: ['C', 'D', 'I'], // Komitmen tanggung jawab (C), Kehilangan momentum (D), Cari support system (I)
+    46: ['C', 'I', 'C'], // Jujur progres (C), Sorot positif (I), Data akurat (C)
+    47: ['S', 'D', 'I'], // Hubungan jangka panjang (S), Orientasi hasil pendek (D), Jaringan profesional (I)
+    48: ['I', 'C', 'D'], // Fleksibel jadwal (I), Terganggu perubahan (C), Solusi immediate (D)
+    49: ['S', 'D', 'S'], // Perhatikan kesejahteraan (S), Fokus tugas-target (D), Ingatkan work-life balance (S)
+    
+    // Default mapping
+    default: ['D', 'I', 'S', 'C']
+  };
+  
+  const faktorMap = mapping[questionIndex] || mapping.default;
+  return faktorMap[statementIndex] || 'D';
+}
+
+  </script>
+</body>
+</html>
